@@ -1,0 +1,123 @@
+#header {
+    background-color: black;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    color: rgb(10, 9, 9);
+    font-size: 30px;
+}
+
+#view-cart {
+    background-color: rgb(134, 150, 195);
+    text-align: right;
+}
+
+p {
+    color: rgb(11, 5, 49);
+}
+
+a {
+    color: rgb(11, 5, 49);
+}
+
+body {
+    background-color: white !important;
+}
+
+
+/*list.html*/
+
+
+/*Product section*/
+
+.product-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.item {
+    width: 250px;
+    height: 350px;
+    display: flex;
+    margin-bottom: 150px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px 10px 10px;
+}
+
+.item_img-box::after {
+    display: flex;
+    margin-top: 150px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8f8;
+}
+
+.item_img-box img {
+    width: 100%;
+    margin-top: 300px;
+}
+
+.item_img-box span {
+    display: inline-block;
+    background-color: #ec4045;
+    color: #fefeff;
+    padding: 2px 17px;
+    margin-top: -30px;
+    margin-bottom: 15px;
+}
+
+
+/*shop detail.html*/
+
+.product-detail img {
+    border-radius: 50%;
+    max-width: 2px;
+    max-height: 2px;
+}
+
+
+/*cart detail.html*/
+
+
+/* Totals section */
+
+.totals .totals-item {
+    float: right;
+    clear: both;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.totals .totals-item label {
+    float: left;
+    clear: both;
+    width: 79%;
+    text-align: right;
+}
+
+.totals .totals-item .totals-value {
+    float: right;
+    width: 21%;
+    text-align: right;
+}
+
+.totals .totals-item-total {
+    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+
+.checkout {
+    float: right;
+    border: 0;
+    margin-top: 20px;
+    padding: 6px 25px;
+    background-color: #6b6;
+    color: #fff;
+    font-size: 25px;
+    border-radius: 3px;
+}
+
+.checkout:hover {
+    background-color: #494;
+}

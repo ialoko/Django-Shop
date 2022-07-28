@@ -5,52 +5,71 @@
 
 {% block content%}
 <h1>Your shopping cart</h1>
-	<table class="cart">
-		<thead>
-			<tr>
-                <th>Image</th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Remove</th>
-                <th>Unit price</th>
-                <th>Price</th>
-			</tr>
-		</thead>
-		<tbody>
-            {%	for	item in	cart %}
-                {%	with product=item.product %}
-                    <tr>
-                        <td>
-                            <a	href="{{	product.get_absolute_url	}}">
-                                    <img	src="{%	if	product.image	%}{{ product.image.url	}}
-                                    {% else %}{% static	'img/no_image.png'	%} {%endif%}">
-                            </a>
-                        </td>
-                        <td>{{product.name}}</td>
-                        <td>
-                            <form action="{%url 'cart:cart_add' product.id %}" method="post">
-                                {{ item.update_quantity_form.quantity }}
-                                {{ item.update_quantity_form.update }}
-                                <input type="submit" value="Update">
-                                {%csrf_token%}
-                            </form>
-                        </td>
-                        <td><a	href="{% url 'cart:cart_remove'	product.id	%}">Remove</a></td>
-                        <td	class="num">${{	item.price }}</td>
-                        <td	class="num">${{	item.total_price }}</td>
-                            </tr>
-                {%	endwith	%}
-            {%	endfor	%}
-            <tr	class="total">
-                    <td>Total</td>
-                    <td	colspan="4"></td>
-                    <td	class="num">${{	cart.get_total_price }}</td>
-            </tr>
+<table id="cart" class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Remove</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%	for	item in	cart %}
+            {%	with product=item.product %}
+                <tr>
+                    <td>
+                        <a	href="{{	product.get_absolute_url	}}">
+                                <img	src="{%	if	product.image	%}{{ product.image.url	}}
+                                {% else %}{% static	'img/default-product.png'	%} {%endif%}">
+                        </a>
+                    </td>
+                    <td>{{product.name}}</td>
+                    <td>
+                        <form action="{%url 'cart:cart_add' product.id %}" method="post">
+                            {{ item.update_quantity_form.quantity }}
+                            {{ item.update_quantity_form.update }}
+                            <input type="submit" value="Update">
+                            {%csrf_token%}
+                        </form>
+                    </td>
+                    <td><a	class = "btn btn-danger" href="{% url 'cart:cart_remove'	product.id	%}">Remove</a></td>
+                    <td	class="num">${{	item.price }}</td>
+                    <td	class="num">${{	item.total_price }}</td>
+                </tr>
+            {%	endwith	%}
+        {%	endfor	%}
+        <tr	class="total">
+                <td>Total</td>
+                <td	colspan="4"></td>
+                <td	class="num">${{	cart.get_total_price }}</td>
+        </tr>
     </tbody>
 </table>
+
+<div class="totals">
+    <div class="totals-item">
+      <label>Subtotal</label>
+      <div class="totals-value" id="cart-subtotal">71.97</div>
+    </div>
+    <div class="totals-item">
+      <label>Tax (5%)</label>
+      <div class="totals-value" id="cart-tax">3.60</div>
+    </div>
+    <div class="totals-item">
+      <label>Shipping</label>
+      <div class="totals-value" id="cart-shipping">15.00</div>
+    </div>
+    <div class="totals-item totals-item-total">
+      <label>Grand Total</label>
+      <div class="totals-value" id="cart-total">90.57</div>
+    </div>
+  </div>
 <p	class="text-right">
     <a	href="{%url	'shop:product_list'	%}"	class="button light">Continue shopping</a>
-    <a	href="{%url 'orders:order_create'%}" class="button">Checkout</a>
+    <a	href="{%url 'orders:order_create'%}" class="checkout">Checkout</a>
 </p>
 {% endblock %}
 

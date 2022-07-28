@@ -13,11 +13,14 @@ def order_create(request):
             order = form.save() #save in database
             for item in cart: #create OrderItem object for each item in cart
                 OrderItem.objects.create(order=order, product=item['product'], price=item['price'], quantity=item['quantity'])
-
-            #clear cart
-            cart.clear()
+            cart.clear() #clear cart
             return render(request, 'orders/order/complete.html', {'order':order})
+        
 
     else: #GET request
         form = OrderCreateForm()
     return render(request, 'orders/order/create.html', {'cart': cart, 'form':form})
+
+
+
+    

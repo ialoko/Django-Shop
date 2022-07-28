@@ -12,7 +12,7 @@ class Order(models.Model):
     city = models.CharField(max_length=100)
     created	= models.DateTimeField(auto_now_add=True)
     updated	= models.DateTimeField(auto_now=True)
-    paid = models.BooleanField(default=False)
+    paid = models.BooleanField(default=True)
 
     class Meta:
         ordering = ('-created',)
@@ -25,6 +25,10 @@ class Order(models.Model):
         for item in self.items.all():
             cost += item.get_cost()
         return cost
+    
+
+    
+
 
 
 class OrderItem(models.Model):

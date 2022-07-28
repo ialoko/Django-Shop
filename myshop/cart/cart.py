@@ -59,3 +59,6 @@ class Cart(object):
         #remove cart from session
         del self.session[settings.CART_SESSION_ID]
         self.save()
+
+    
+

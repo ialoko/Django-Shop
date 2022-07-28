@@ -14,14 +14,45 @@
         </ul>
         <p>Total: ${{cart.get_total_price}}</p>
     </div>
-    <form	action="."	method="post" class="order-form">
+    <form action="."	method="post" class="order-form">
+            <h2>Fill out your information</h2>
             {{form.as_p}}
+            <h3>Place order through PayPal</h3>
             <div class="w3-container">
-                <!-- PAYPAL BUTTONS HERE -->
-                
+                <div id="paypal-button-container"></div>
+        
+                <!-- Include the PayPal JavaScript SDK -->
+                <script src="https://www.paypal.com/sdk/js?client-id=AatcdH0yyLtJaQu6XS9xwhzLivqM2vGqNNbJv_hRwNkXI8yrqrLU2VkroPJGtwh6Mq1k5T5AINMN0XxF&currency=CAD"></script>
             
-                </div>
-            <p><input	type="submit" value="Place order"></p>
+                <script>
+                    // Render the PayPal button into #paypal-button-container
+                    paypal.Buttons({
+                        // Set up the transaction
+                        createOrder: function(data, actions) {
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: {{cart.get_total_price}}
+                                    }
+                                }]
+                            });
+                        },
+            
+                        // Finalize the transaction
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(orderData) {
+                                // Successful capture! For demo purposes:
+                                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                var transaction = orderData.purchase_units[0].payments.captures[0];
+                                alert('Transaction '+ transaction.status + ': ' + transaction.id);
+                                var button = document.querySelector('.btn.btn_large.btn_green');
+                                button.click(); //click submit button on complete
+                            });
+                        }
+                    }).render('#paypal-button-container');
+                </script>
+            </div>
+            <p><input type="submit" class="btn btn_large btn_green" style="display: none;"></p>
             {%csrf_token%}
     </form>
 {%	endblock %}
