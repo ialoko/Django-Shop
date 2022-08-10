@@ -20,12 +20,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kmcra11^+3k92a!bg%jsg1@=bc574msdavr0+4=-xb^j+15*0*'
+from decouple import config
+
+SECRET_KEY = config('SECRET_KEY')
+#SECRET_KEY = 'kmcra11^+3k92a!bg%jsg1@=bc574msdavr0+4=-xb^j+15*0*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['maverly.herokuapp.com']
 
 
 # Application definition
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -77,10 +81,21 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'myshop',#database name
+        'USER': 'postgres',#projectuser
+        'PASSWORD': config('POSTGRES_PASS'),#password
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -127,7 +142,7 @@ STATIC_ROOT  =   os.path.join(BASE_DIR, 'staticfiles')
 
 #Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static/'),
 )
 
 
@@ -136,3 +151,15 @@ MEDIA_URL	=	'/media/'
 MEDIA_ROOT	=	os.path.join(BASE_DIR,	'media/')
 
 CART_SESSION_ID = 'cart'
+
+#  Add configuration for static files storage using whitenoise
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
+
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

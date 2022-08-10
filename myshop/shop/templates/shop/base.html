@@ -3,30 +3,36 @@
 <html>
 <head>
     <meta	charset="utf-8"	/>
-    <title>{%	block	title	%}My shop{%	endblock	%}</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link	href="{% static	'css/style.css'	%}"	rel="stylesheet">
+    <title>{%	block	title	%}Maverly{%	endblock	%}</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link	href="{% static	'css/style.css'	%}"	rel="stylesheet"/>
 
 </head>
 <body>
-    <div id="header">
-	<a	href="/" class="logo">My shop</a>
-	</div>
-	<div id="subheader">
-		<div id="view-cart">
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+		<div id="header" class="navbar-brand navbar-light scroll">
+			<a	href="/" class="logo">Maverly</a>
+		</div>
+		<div id = "about" class="nav-link-scroll">
+			<a href="#who-are-we">Who are We?</a>
+		</div>
+		<div id = "social" class="nav-link-scroll">
+			<a href="#who-are-we">Social Medias</a>
+		</div>
+		<div id = "marketing" class="nav-link-scroll">
+			<a href="#who-are-we">Summer '22</a>
+		</div>
+		<div id="view-cart" class="nav-link scroll row">
 			{% with total_items=cart|length%}
 			{%if total_items > 0 %}
-				<a class = "btn btn-info btn-lg" href="{% url 'cart:cart_detail' %}">
-				View your cart <span class="glyphicon glyphicon-shopping-cart"> </span>  </a>
-				<p style="color:rgb(11, 5, 49); font-size: 20px;">
-				{{total_items}} item{{total_items|pluralize}},
-				${{cart.get_total_price}}</p>
+				<a class = "btn btn-info btn-medium" href="{% url 'cart:cart_detail' %}"> {{total_items}} item{{total_items|pluralize}} ,
+					${{cart.get_cart_total}}    <span class="glyphicon glyphicon-shopping-cart"> </span> </a>
 			{%else%}
 			Your cart is empty
 			{%endif%}
 			{%endwith%}
 		</div>
-	</div>
+	</nav>
 	<div id="content">
 		{%	block	content	%}
 		{%	endblock %}

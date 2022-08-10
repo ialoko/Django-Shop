@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from shop.models import Product
+import decimal
 
 class Cart(object):
     def __init__(self, request):
@@ -51,8 +52,22 @@ class Cart(object):
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
 
-    def get_total_price(self):
+    def get_cart_total(self):
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+    
+    def get_cart_taxes(self):
+        #tax in ontario is 13%
+        return round(self.get_cart_total() * decimal.Decimal(0.13), 2)
+
+    def get_shipping(self):
+        #base cost
+        shipping = decimal.Decimal(3.99)
+        for item in self.cart.values():
+            shipping += decimal.Decimal(1.99)
+        return round(shipping, 2)
+
+    def get_total_price(self):
+        return self.get_cart_taxes() + self.get_shipping() + self.get_cart_total()
 
 
     def clear(self):

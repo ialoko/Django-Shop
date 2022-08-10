@@ -1,17 +1,3 @@
-#header {
-    background-color: black;
-    height: 50px;
-    width: 100%;
-    text-align: center;
-    color: rgb(10, 9, 9);
-    font-size: 30px;
-}
-
-#view-cart {
-    background-color: rgb(134, 150, 195);
-    text-align: right;
-}
-
 p {
     color: rgb(11, 5, 49);
 }
@@ -20,8 +6,83 @@ a {
     color: rgb(11, 5, 49);
 }
 
+ul {
+    list-style-type: circle;
+}
+
 body {
     background-color: white !important;
+}
+
+.navbar {
+    background-color: transparent;
+    border-color: transparent;
+    display: flex;
+    width: 100%;
+}
+
+.navbar-brand {
+    margin-top: 3%;
+    font-size: 100px !important;
+    color: rgb(0, 0, 0) !important;
+    float: left;
+    font-family: "Merienda";
+}
+
+.nav-link-scroll {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#header a {
+    color: #008B8B !important;
+    text-align: center;
+    font-size: 100px;
+    font-family: "Merienda";
+}
+
+#about {
+    margin-top: 3%;
+    color: #2ab2b2 !important;
+    text-align: center;
+    font-size: 20px;
+    font-family: serif;
+}
+
+#social {
+    margin-top: 3%;
+    color: #2ab2b2 !important;
+    text-align: center;
+    font-size: 20px;
+    font-family: serif;
+}
+
+#marketing {
+    margin-top: 3%;
+    color: #2ab2b2 !important;
+    text-align: center;
+    font-size: 20px;
+    font-family: serif;
+}
+
+#view-cart {
+    position: fixed;
+    margin-top: 3%;
+    /* the fixed pos makes it work */
+    right: 2%;
+    text-align: right;
+    float: right;
+    flex-direction: row;
+}
+
+.logo {
+    background: url(https://is4.revolveassets.com/images/up/2022/July/072622_f_lwldresses_iphone_2x.jpg);
+    background-size: cover;
+}
+
+#who-are-we {
+    background: url(https://i.pinimg.com/originals/6f/e0/6c/6fe06ca627037b71b5c9793778b11fa6.jpg);
+    background-size: cover;
 }
 
 
@@ -30,25 +91,32 @@ body {
 
 /*Product section*/
 
-.product-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+#sidebar {
+    float: right;
+    position: fixed;
+    right: 2%;
 }
 
-.item {
+#product-list {
+    float: left;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+#item {
     width: 250px;
     height: 350px;
     display: flex;
     margin-bottom: 150px;
-    flex-direction: column;
     align-items: center;
     margin: 0 10px 10px 10px;
 }
 
 .item_img-box::after {
     display: flex;
-    margin-top: 150px;
+    margin-top: 100px;
     flex-direction: column;
     align-items: center;
     background-color: #f8f8f8;
@@ -56,13 +124,12 @@ body {
 
 .item_img-box img {
     width: 100%;
-    margin-top: 300px;
+    margin-top: 100px;
 }
 
-.item_img-box span {
+.item_img-box {
     display: inline-block;
-    background-color: #ec4045;
-    color: #fefeff;
+    color: #0f0f10;
     padding: 2px 17px;
     margin-top: -30px;
     margin-bottom: 15px;
@@ -78,46 +145,4 @@ body {
 }
 
 
-/*cart detail.html*/
-
-
-/* Totals section */
-
-.totals .totals-item {
-    float: right;
-    clear: both;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.totals .totals-item label {
-    float: left;
-    clear: both;
-    width: 79%;
-    text-align: right;
-}
-
-.totals .totals-item .totals-value {
-    float: right;
-    width: 21%;
-    text-align: right;
-}
-
-.totals .totals-item-total {
-    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-}
-
-.checkout {
-    float: right;
-    border: 0;
-    margin-top: 20px;
-    padding: 6px 25px;
-    background-color: #6b6;
-    color: #fff;
-    font-size: 25px;
-    border-radius: 3px;
-}
-
-.checkout:hover {
-    background-color: #494;
-}
+/*cart detail.html*
