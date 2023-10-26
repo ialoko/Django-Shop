@@ -1,4 +1,4 @@
-# Django-Shop
+# Maverly Shop
  
 This is a Django-based e-commerce web application designed to help businesses sell products online. The application provides an intuitive interface for managing products, orders, and customers.
 
